@@ -1,0 +1,32 @@
+{
+  "name": "grammarly-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "14.16.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@stewartmcgown/grammarly-api": "^1.1.2",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "8.2.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jaynil1611/Grammarly-API"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

@@ -1,0 +1,52 @@
+<!-- views/index.ejs -->
+<!-- ... Existing HTML code ... -->
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grammar Checker</title>
+</head>
+<body>
+   
+
+<form id="grammarForm">
+    <label for="text">Enter Text:</label>
+    <!-- <input type="text" id="text" name="text"> -->
+    <textarea type="text" id="text" name="text"></textarea>
+    <button type="submit">Check Grammar</button>
+</form>
+
+<div id="results">
+    <!-- Display results here using JavaScript -->
+</div>
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("grammarForm");
+        const resultsContainer = document.getElementById("results");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const text = document.getElementById("text").value;
+
+            fetch(`/api/v3/check?text=${encodeURIComponent(text)}`)
+                .then(response => response.json())
+                // .then(data => {
+                //     const alerts = data.alerts.map(alert => `<li>${alert.title}: ${alert.details}</li>`).join("");
+                //     resultsContainer.innerHTML = `<h2>Grammar Check Results:</h2><ul>${alerts}</ul>`;
+                // })
+                .then(data => {
+                    const alerts = data.alerts.map(alert => `<li>${alert.title}: ${alert.details}</li>`).join("");
+                    const score = data.score.score;
+                    const corrected = data.corrected;
+                    resultsContainer.innerHTML = `<h2>Grammar Check Results:</h2><ul><li>Corrected : ${corrected}</li><li>Score : ${score}</li><li>${alerts}</li></ul>`;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    resultsContainer.innerHTML = "<p>An error occurred while processing the request.</p>";
+                });
+        });
+    });
+</script>
